@@ -1,18 +1,13 @@
-# Use the official Python image from the Docker Hub with an Alpine variant
-FROM python:3.9-alpine
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# Set the working directory in the container
-WORKDIR /app
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-COPY requirements.txt /usr/src/app/
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+# Create a text file example.txt
+RUN echo "Hello, World!" > example.txt
 
-# copy files required for the app to run
-COPY app.py /usr/src/app/
+# Confirm file creation
+RUN ls -l
 
-COPY templates/index.html /usr/src/app/templates/
-
-EXPOSE 5000
-
-# run the application
-CMD ["python", "/usr/src/app/app.py"]
+# Further instructions can follow for your application setup
